@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, IDSNetMethod){
+    GET,
+    POST,
+    PUT,
+    PATCH,
+    DELETE
+};
+
 @interface IDSNetService : NSObject
 
 @end
