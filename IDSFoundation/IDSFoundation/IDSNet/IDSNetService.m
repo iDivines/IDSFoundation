@@ -7,7 +7,20 @@
 //
 
 #import "IDSNetService.h"
+#import "IDSNetRequestOperate.h"
 
 @implementation IDSNetService
++ (instancetype)shared{
+    static IDSNetService *sharedManager;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedManager = [[IDSNetService alloc] init];
+    });
+    return sharedManager;
+}
 
+- (void)startRequestWithOperate:(IDSNetRequestOperate *)operate{
+    
+}
 @end

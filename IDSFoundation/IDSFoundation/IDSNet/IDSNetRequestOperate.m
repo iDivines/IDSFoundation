@@ -8,7 +8,6 @@
 
 #import "IDSNetRequestOperate.h"
 #import "IDSNetService.h"
-#import "IDSNetPath.h"
 
 @interface IDSNetRequestOperate()
 @property (nonatomic, assign) IDSNetMethod method;
@@ -20,11 +19,11 @@
 
 @implementation IDSNetRequestOperate
 
-+ (instancetype)initWithMethod:(IDSNetMethod)method
-                      pathType:(IDSNetPathType)pathType
-                        params:(NSDictionary *)params
-                  beginHandler:(void(^)())beginHandler
-               completeHandler:(void(^)(id result))completeHandler{
++ (instancetype)operateWithMethod:(IDSNetMethod)method
+                         pathType:(IDSNetPathType)pathType
+                           params:(NSDictionary *)params
+                     beginHandler:(void(^)())beginHandler
+                  completeHandler:(void(^)(id result))completeHandler{
     IDSNetRequestOperate *operate = [[IDSNetRequestOperate alloc] init];
     operate.method = method;
     operate.pathType = pathType;
@@ -32,6 +31,10 @@
     operate.beginHandler = beginHandler;
     operate.completeHandler = completeHandler;
     return operate;
+}
+
+- (void)fly{
+    [IDSNetService.shared startRequestWithOperate:self];
 }
 
 @end

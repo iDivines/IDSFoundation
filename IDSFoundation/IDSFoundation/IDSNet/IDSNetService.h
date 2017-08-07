@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class IDSNetRequestOperate;
 
 typedef NS_ENUM(NSInteger, IDSNetMethod){
     GET,
@@ -17,5 +18,6 @@ typedef NS_ENUM(NSInteger, IDSNetMethod){
 };
 
 @interface IDSNetService : NSObject
-
++ (instancetype)shared;
+- (void)startRequestWithOperate:(IDSNetRequestOperate *)operate;
 @end
