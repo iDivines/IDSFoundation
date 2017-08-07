@@ -10,8 +10,6 @@
 #import "IDSNetService.h"
 
 @interface IDSNetRequestOperate()
-@property (nonatomic, assign) IDSNetMethod method;
-@property (nonatomic, assign) IDSNetPathType pathType;
 @property (nonatomic, strong) NSDictionary *params;
 @property (nonatomic, strong) void(^beginHandler)();
 @property (nonatomic, strong) void(^completeHandler)();
@@ -24,17 +22,36 @@
                            params:(NSDictionary *)params
                      beginHandler:(void(^)())beginHandler
                   completeHandler:(void(^)(id result))completeHandler{
-    IDSNetRequestOperate *operate = [[IDSNetRequestOperate alloc] init];
-    operate.method = method;
-    operate.pathType = pathType;
-    operate.params = params;
-    operate.beginHandler = beginHandler;
-    operate.completeHandler = completeHandler;
-    return operate;
+    return [[IDSNetRequestOperate alloc] initWithMethod:method
+                                               pathType:pathType
+                                                 params:params
+                                           beginHandler:beginHandler
+                                        completeHandler:completeHandler];
+}
+
+- (instancetype)initWithMethod:(IDSNetMethod)method
+                      pathType:(IDSNetPathType)pathType
+                        params:(NSDictionary *)params
+                  beginHandler:(void(^)())beginHandler
+               completeHandler:(void(^)(id result))completeHandler{
+    if(self = [super init]){
+        _method = method;
+        _pathType = pathType;
+        _params = params;
+        _beginHandler = beginHandler;
+        _completeHandler = completeHandler;
+    }
+    return self;
 }
 
 - (void)fly{
     [IDSNetService.shared startRequestWithOperate:self];
+}
+
+#pragma makr - helper
+
+- (NSString *)path{
+    return [IDSNetPath netPathWithType:self.pathType];
 }
 
 @end
