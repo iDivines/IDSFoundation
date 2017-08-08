@@ -24,6 +24,11 @@ typedef NS_ENUM(NSInteger, IDSNetRelation){
     repeatBehind, //取消之前的请求任务；新生成请求任务，响应全部操作
 };
 
+typedef NS_ENUM(NSInteger, IDSNetResult){
+    success,
+    fail,
+};
+
 @interface IDSNetService : NSObject
 + (instancetype)shared;
 - (void)startRequestWithOperate:(IDSNetRequestOperate *)operate;
